@@ -4,6 +4,7 @@ import com.example.springvaadin.data.entity.Contact;
 import com.example.springvaadin.data.service.CrmService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -12,7 +13,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-
+@CssImport("./themes/springvaadin/styles.css")
 @PageTitle("Contacts")
 @Route(value = "")
 public class ListView extends VerticalLayout {
@@ -69,10 +70,16 @@ public class ListView extends VerticalLayout {
         filterText.addValueChangeListener(e -> updateList());
 
         Button addContactButton = new Button("Add contact");
+        addContactButton.addClickListener(e -> addContact());
 
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addContactButton);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    private void addContact() {
+        grid.asSingleSelect().clear();
+        editContact(new Contact());
     }
 
     private void configureGrid() {
