@@ -3,6 +3,7 @@ package com.example.springvaadin.views.list;
 import com.example.springvaadin.data.entity.Contact;
 import com.example.springvaadin.data.service.CrmService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
@@ -61,7 +62,24 @@ public class ListView extends VerticalLayout {
     private void configureForm() {
         form = new ContactForm(service.findAllCompanies(), service.findAllStatuses());
         form.setWidth("25em");
+
+        form.addListener(ContactForm.SaveEvent.class, this::saveContact);
+        form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
+        form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
     }
+
+    private void saveContact(ContactForm.SaveEvent event) {
+        service.saveContact(event.getContact());
+        updateList();
+        closeEditor();
+    }
+
+    private void deleteContact(ContactForm.DeleteEvent event) {
+        service.deleteContact(event.getContact());
+        updateList();
+        closeEditor();
+    }
+
 
     private Component getToolbar() {
         filterText.setPlaceholder("Filter by name...");
