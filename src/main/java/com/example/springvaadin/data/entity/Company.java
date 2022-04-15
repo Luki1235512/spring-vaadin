@@ -15,7 +15,7 @@ public class Company extends AbstractEntity {
     private String name;
 
     @OneToMany(mappedBy = "company")
-    @Nullable
+//    @Nullable
     private List<Contact> employees = new LinkedList<>();
 
     public String getName() {

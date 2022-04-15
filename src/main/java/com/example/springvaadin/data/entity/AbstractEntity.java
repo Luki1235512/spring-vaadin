@@ -10,13 +10,13 @@ public class AbstractEntity {
 
     @Id
     @GeneratedValue
-    private UUID id;
+    private Integer id;
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
