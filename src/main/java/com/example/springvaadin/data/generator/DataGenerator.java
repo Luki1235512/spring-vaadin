@@ -24,7 +24,8 @@ import org.springframework.context.annotation.Bean;
 public class DataGenerator {
 
     @Bean
-    public CommandLineRunner loadData(ContactRepository contactRepository, CompanyRepository companyRepository,
+    public CommandLineRunner loadData(ContactRepository contactRepository,
+                                      CompanyRepository companyRepository,
                                       StatusRepository statusRepository) {
 
         return args -> {
@@ -33,21 +34,20 @@ public class DataGenerator {
                 logger.info("Using existing database");
                 return;
             }
-            int seed = 123;
+
+            int seed = 2137;
 
             logger.info("Generating demo data");
-            ExampleDataGenerator<Company> companyGenerator = new ExampleDataGenerator<>(Company.class,
-                    LocalDateTime.now());
+            ExampleDataGenerator<Company> companyGenerator = new ExampleDataGenerator<>(Company.class, LocalDateTime.now());
             companyGenerator.setData(Company::setName, DataType.COMPANY_NAME);
             List<Company> companies = companyRepository.saveAll(companyGenerator.create(5, seed));
 
-            List<Status> statuses = statusRepository
-                    .saveAll(Stream.of("Imported lead", "Not contacted", "Contacted", "Customer", "Closed (lost)")
-                            .map(Status::new).collect(Collectors.toList()));
+            List<Status> statuses = statusRepository.saveAll(Stream.of("Imported lead", "Not contacted",
+                            "Contacted", "Customer", "Closed (lost)").map(Status::new).collect(Collectors.toList()));
 
-            logger.info("... generating 50 Contact entities...");
-            ExampleDataGenerator<Contact> contactGenerator = new ExampleDataGenerator<>(Contact.class,
-                    LocalDateTime.now());
+            logger.info("...generating 50 Contact entities...");
+            ExampleDataGenerator<Contact> contactGenerator = new ExampleDataGenerator<>(Contact.class, LocalDateTime.now());
+
             contactGenerator.setData(Contact::setFirstName, DataType.FIRST_NAME);
             contactGenerator.setData(Contact::setLastName, DataType.LAST_NAME);
             contactGenerator.setData(Contact::setEmail, DataType.EMAIL);
