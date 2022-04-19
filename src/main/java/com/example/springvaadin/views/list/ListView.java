@@ -3,7 +3,6 @@ package com.example.springvaadin.views.list;
 import com.example.springvaadin.data.entity.Contact;
 import com.example.springvaadin.data.service.CrmService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
@@ -16,7 +15,7 @@ import com.vaadin.flow.router.Route;
 
 @CssImport("./themes/springvaadin/styles.css")
 @PageTitle("Contacts")
-@Route(value = "")
+@Route(value = "", layout = MainLayout.class)
 public class ListView extends VerticalLayout {
 
     Grid<Contact> grid = new Grid<>(Contact.class);

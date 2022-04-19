@@ -21,7 +21,7 @@ import com.vaadin.flow.shared.Registration;
 
 import java.util.List;
 
-public class  ContactForm extends FormLayout {
+public class ContactForm extends FormLayout {
 
     Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
 
