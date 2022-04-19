@@ -1,6 +1,8 @@
 package com.example.springvaadin.data.entity;
 
 
+import org.hibernate.annotations.Formula;
+
 import javax.annotation.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,8 +17,15 @@ public class Company extends AbstractEntity {
     private String name;
 
     @OneToMany(mappedBy = "company")
-//    @Nullable
+    @Nullable
     private List<Contact> employees = new LinkedList<>();
+
+//    @Formula("(select count(c.id) from Contact c where c.company_id = id")
+//    private int employeeCount;
+//
+//    public int getEmployeeCount() {
+//        return employeeCount;
+//    }
 
     public String getName() {
         return name;
