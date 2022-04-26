@@ -1,12 +1,7 @@
-package com.example.springvaadin.views.list;
+package com.example.springvaadin.views;
 
 import com.example.springvaadin.data.service.CrmService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.charts.Chart;
-import com.vaadin.flow.component.charts.model.ChartType;
-import com.vaadin.flow.component.charts.model.DataSeries;
-import com.vaadin.flow.component.charts.model.DataSeriesItem;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;

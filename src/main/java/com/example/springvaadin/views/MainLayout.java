@@ -1,5 +1,7 @@
-package com.example.springvaadin.views.list;
+package com.example.springvaadin.views;
 
+import com.example.springvaadin.views.DashboardView;
+import com.example.springvaadin.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
@@ -33,7 +35,8 @@ public class MainLayout extends AppLayout {
     private void createDrawer() {
         RouterLink listView = new RouterLink("List", ListView.class);
         listView.setHighlightCondition(HighlightConditions.sameLocation());
-        addToDrawer(new VerticalLayout(listView));
+        addToDrawer(new VerticalLayout(listView,
+                new RouterLink("Stats", DashboardView.class)));
     }
 
 }

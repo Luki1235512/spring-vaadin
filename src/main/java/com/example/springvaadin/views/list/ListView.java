@@ -2,6 +2,7 @@ package com.example.springvaadin.views.list;
 
 import com.example.springvaadin.data.entity.Contact;
 import com.example.springvaadin.data.service.CrmService;
+import com.example.springvaadin.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
