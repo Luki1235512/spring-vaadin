@@ -1,6 +1,5 @@
 package com.example.springvaadin.views;
 
-import com.example.springvaadin.views.DashboardView;
 import com.example.springvaadin.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
