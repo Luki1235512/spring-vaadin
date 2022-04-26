@@ -20,12 +20,12 @@ public class Company extends AbstractEntity {
     @Nullable
     private List<Contact> employees = new LinkedList<>();
 
-//    @Formula("(select count(c.id) from Contact c where c.company_id = id")
-//    private int employeeCount;
-//
-//    public int getEmployeeCount() {
-//        return employeeCount;
-//    }
+    @Formula("(select count(c.id) from Contact c where c.company_id = id)")
+    private int employeeCount;
+
+    public int getEmployeeCount() {
+        return employeeCount;
+    }
 
     public String getName() {
         return name;

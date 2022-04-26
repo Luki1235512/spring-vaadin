@@ -24,10 +24,7 @@ public class DashboardView extends VerticalLayout {
         addClassName("dashboard-view");
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        H1 text = new H1("There will be chart");
-        add(text);
-
-//        add(getContactStats(), getCompaniesChart());
+        add(getContactStats());
     }
 
     private Component getContactStats() {
@@ -36,7 +33,7 @@ public class DashboardView extends VerticalLayout {
         return stats;
     }
 
-    private Component getCompaniesChart() {
+//    private Component getCompaniesChart() {
 //        Chart chart = new Chart(ChartType.PIE);
 //
 //        DataSeries dataSeries = new DataSeries();
@@ -45,9 +42,9 @@ public class DashboardView extends VerticalLayout {
 //        });
 //
 //        chart.getConfiguration().setSeries(dataSeries);
-
-        return null;
-    }
+//        chart.getConfiguration();
+//        return chart;
+//    }
 
 
 }
