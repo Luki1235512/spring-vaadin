@@ -31,8 +31,8 @@ public class SecurityConfig extends VaadinWebSecurityConfigurerAdapter {
     @Override
     protected UserDetailsService userDetailsService() {
         // TODO: Change this
-        return new InMemoryUserDetailsManager(User.withUsername("user")
-                .password("{noop}userpass")
+        return new InMemoryUserDetailsManager(User.withUsername("password")
+                .password("{noop}password")
                 .roles("USER")
                 .build());
     }
