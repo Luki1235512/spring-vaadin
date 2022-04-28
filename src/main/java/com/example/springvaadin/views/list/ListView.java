@@ -3,20 +3,24 @@ package com.example.springvaadin.views.list;
 import com.example.springvaadin.data.entity.Contact;
 import com.example.springvaadin.data.service.CrmService;
 import com.example.springvaadin.views.MainLayout;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.security.PermitAll;
 
 @CssImport("./themes/springvaadin/styles.css")
+@Component
+@Scope("prototype")
 @PageTitle("Contacts")
 @Route(value = "", layout = MainLayout.class)
 @PermitAll
@@ -25,7 +29,7 @@ public class ListView extends VerticalLayout {
     Grid<Contact> grid = new Grid<>(Contact.class);
     TextField filterText = new TextField();
     ContactForm form;
-    private CrmService service;
+    CrmService service;
 
     public ListView(CrmService service) {
         this.service = service;
@@ -35,10 +39,20 @@ public class ListView extends VerticalLayout {
         configureGrid();
         configureForm();
 
+//        FlexLayout content = new FlexLayout(grid, form);
+//        content.setFlexGrow(2, grid);
+//        content.setFlexGrow(1, form);
+//        content.setFlexShrink(0, form);
+//        content.addClassNames("content", "gap-m");
+//        content.setSizeFull();
+
         add(getToolbar(), getContent());
 
         updateList();
         closeEditor();
+
+        grid.asSingleSelect().addValueChangeListener(event ->
+                editContact(event.getValue()));
     }
 
     private void closeEditor() {
@@ -51,7 +65,7 @@ public class ListView extends VerticalLayout {
         grid.setItems(service.findAllContacts(filterText.getValue()));
     }
 
-    private Component getContent() {
+    private HorizontalLayout getContent() {
 
         HorizontalLayout content = new HorizontalLayout(grid, form);
         content.setFlexGrow(2, grid);
@@ -84,7 +98,7 @@ public class ListView extends VerticalLayout {
     }
 
 
-    private Component getToolbar() {
+    private HorizontalLayout getToolbar() {
         filterText.setPlaceholder("Filter by name...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
@@ -110,9 +124,6 @@ public class ListView extends VerticalLayout {
         grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
         grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
-
-        grid.asSingleSelect().addValueChangeListener(e -> editContact(e.getValue()));
-
     }
 
     private void editContact(Contact contact) {
